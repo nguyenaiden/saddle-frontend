@@ -18,7 +18,7 @@ import DoubleArrowDown from "@mui/icons-material/KeyboardDoubleArrowDown"
 import HighPriceImpactConfirmation from "./HighPriceImpactConfirmation"
 import { ReactComponent as ThinArrowDown } from "../assets/icons/thinArrowDown.svg"
 import classnames from "classnames"
-// import { formatGasToString } from "../utils/gas"
+// import { formatGasToString } from "../utils/gas" //
 import { formatSlippageToString } from "../utils/slippage"
 import { isHighPriceImpact } from "../utils/priceImpact"
 import { useSelector } from "react-redux"
