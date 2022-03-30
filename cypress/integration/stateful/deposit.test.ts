@@ -13,7 +13,6 @@ context("Deposit Flow", () => {
   })
   function testPoolDeposit(poolName: PoolName) {
     it(`successfully completes a deposit of all ${poolName} assets`, () => {
-      let beforeValue: { [key: string]: number } = {}
       cy.contains(poolName)
         .parents("[data-testid=poolOverview]")
         .within(() => {
@@ -23,22 +22,13 @@ context("Deposit Flow", () => {
       cy.get("input").first({ timeout: 10000 }).should("be.enabled")
       // TODO: assert default state of the page
       // Get before value of each token in My Share section
-      poolTokens[poolName].forEach((token: string) => {
-        cy.get("[data-testid=tokenName]")
-          .contains(token)
-          .parent()
-          .find("[data-testid=tokenValue]")
-          .then(($value) => {
-            beforeValue = { ...beforeValue, [token]: parseInt($value.text()) }
-          })
-      })
 
       cy.get("#tokenInput input").then(($inputs) => {
         cy.wrap($inputs).each(($input) => {
           cy.wrap($input).type("1")
         })
         // TODO: assert price impact changes
-        cy.wait(500)
+        // cy.wait(500)
         // click "deposit" to trigger review modal
         cy.get("button").contains("Deposit").first().click()
         // TODO: assert review data
@@ -54,7 +44,7 @@ context("Deposit Flow", () => {
               .find("[data-testid=tokenValue]")
               .then(($value) => {
                 const afterValue = parseInt($value.text())
-                expect(afterValue).to.eq(beforeValue[token] + 1)
+                expect(afterValue).to.eq(1)
               })
           })
         })
